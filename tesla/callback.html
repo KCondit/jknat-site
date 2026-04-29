@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>Tesla Auth Callback</title></head>
+<body style="font-family: system-ui; max-width: 600px; margin: 40px auto; padding: 20px;">
+  <h2>Tesla Authorization</h2>
+  <div id="result"></div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const el = document.getElementById('result');
+    if (code) {
+      el.innerHTML = '<p style="color:green;font-weight:bold;">Authorization code received!</p>'
+        + '<p>Copy this code:</p>'
+        + '<textarea rows="4" cols="60" onclick="this.select()" readonly>' + code + '</textarea>'
+        + '<p style="color:#666;font-size:13px;">Paste this back in the terminal to complete setup.</p>';
+    } else {
+      el.innerHTML = '<p style="color:red;">Error: ' + (params.get('error') || 'No code received') + '</p>'
+        + '<p>' + (params.get('error_description') || '') + '</p>';
+    }
+  </script>
+</body>
+</html>
